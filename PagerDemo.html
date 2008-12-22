@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>jQuery.pager.js Test</title>
+    <link href="Pager.css" rel="stylesheet" type="text/css" />
+    <script src="jquery-1.2.6.min.js" type="text/javascript"></script>
+    <script src="jquery.pager.js" type="text/javascript"></script>
+    <script type="text/javascript" language="javascript">
+
+        $(document).ready(function() {
+            $("#pager").pager({ pagenumber: 1, pagecount: 15, buttonClickCallback: PageClick });
+        });
+
+        PageClick = function(pageclickednumber) {
+            $("#pager").pager({ pagenumber: pageclickednumber, pagecount: 15, buttonClickCallback: PageClick });
+            $("#result").html("Clicked Page " + pageclickednumber);
+        }
+       
+    </script>
+</head>
+<body>
+<h1 id="result">Click the pager below.</h1>
+<div id="pager" />
+</body>
+</html>
