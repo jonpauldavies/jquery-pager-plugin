@@ -43,7 +43,7 @@
     };
 
     // render and return the pager with the supplied options
-    function renderpager(pagenumber, pagecount, buttonClickCallback) {
+    function renderpager(pagenumber, pagecount, buttonClickCallback, numOfBtns) {
 
         // setup $pager to hold render
         var $pager = $('<ul class="pages"></ul>');
@@ -51,17 +51,18 @@
         // add in the previous and next buttons
         $pager.append(renderButton('first', pagenumber, pagecount, buttonClickCallback)).append(renderButton('prev', pagenumber, pagecount, buttonClickCallback));
 
-        // pager currently only handles 10 viewable pages ( could be easily parameterized, maybe in next version ) so handle edge cases
+        // pager now handles 10 viewable pages when its not specified.
+        numOfBtns = numOfBtns || 10;
         var startPoint = 1;
         var endPoint = 9;
 
-        if (pagenumber > 4) {
-            startPoint = pagenumber - 4;
-            endPoint = pagenumber + 4;
+        if (pagenumber > numOfBtns / 2) {
+            startPoint = pagenumber - Math.floor( numOfBtns / 2 );
+            endPoint = pagenumber + Math.floor( numOfBtns / 2 );
         }
 
         if (endPoint > pagecount) {
-            startPoint = pagecount - 8;
+            startPoint = pagecount - numOfBtns + 1;
             endPoint = pagecount;
         }
 
