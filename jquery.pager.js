@@ -57,7 +57,7 @@
         // pager now handles 10 viewable pages when its not specified.
         buttoncount = buttoncount || 10;
         var startPoint = 1;
-        var endPoint = 9;
+        var endPoint = startPoint - 1 + buttoncount;
 
         if (pagenumber > buttoncount / 2) {
             startPoint = pagenumber - Math.floor( buttoncount / 2 );
