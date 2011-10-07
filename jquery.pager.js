@@ -35,7 +35,10 @@
         return this.each(function() {
 
         // empty out the destination element and then render out the pager with the supplied options
-            $(this).empty().append(renderpager(parseInt(options.pagenumber), parseInt(options.pagecount), options.buttonClickCallback));
+            $(this).empty().append(renderpager(parseInt(options.pagenumber),
+                                               parseInt(options.pagecount),
+                                               options.buttonClickCallback),
+                                               parseInt(options.buttoncount));
             
             // specify correct cursor activity
             $('.pages li').mouseover(function() { document.body.style.cursor = "pointer"; }).mouseout(function() { document.body.style.cursor = "auto"; });
@@ -43,7 +46,7 @@
     };
 
     // render and return the pager with the supplied options
-    function renderpager(pagenumber, pagecount, buttonClickCallback, numOfBtns) {
+    function renderpager(pagenumber, pagecount, buttonClickCallback, buttoncount) {
 
         // setup $pager to hold render
         var $pager = $('<ul class="pages"></ul>');
@@ -52,17 +55,17 @@
         $pager.append(renderButton('first', pagenumber, pagecount, buttonClickCallback)).append(renderButton('prev', pagenumber, pagecount, buttonClickCallback));
 
         // pager now handles 10 viewable pages when its not specified.
-        numOfBtns = numOfBtns || 10;
+        buttoncount = buttoncount || 10;
         var startPoint = 1;
         var endPoint = 9;
 
-        if (pagenumber > numOfBtns / 2) {
-            startPoint = pagenumber - Math.floor( numOfBtns / 2 );
-            endPoint = pagenumber + Math.floor( numOfBtns / 2 );
+        if (pagenumber > buttoncount / 2) {
+            startPoint = pagenumber - Math.floor( buttoncount / 2 );
+            endPoint = pagenumber + Math.floor( buttoncount / 2 );
         }
 
         if (endPoint > pagecount) {
-            startPoint = pagecount - numOfBtns + 1;
+            startPoint = pagecount - buttoncount + 1;
             endPoint = pagecount;
         }
 
@@ -122,7 +125,8 @@
     // pager defaults. hardly worth bothering with in this case but used as placeholder for expansion in the next version
     $.fn.pager.defaults = {
         pagenumber: 1,
-        pagecount: 1
+        pagecount: 1,
+        buttoncount: 10
     };
 
 })(jQuery);
