@@ -54,6 +54,14 @@
         });
     };
 
+    function zeroPad(num,count) {
+        var numZeropad = num + '';
+        while(numZeropad.length < count) {
+            numZeropad = "0" + numZeropad;
+        }
+        return numZeropad;
+    }
+
     // render and return the pager with the supplied options
     function renderpager(pagenumber, pagecount, buttonClickCallback, show_first_and_last, number_of_pages, min_page_digits, button_label_first, button_label_last, button_label_prev, button_label_next, page_seperator) {
 
@@ -88,11 +96,8 @@
         // loop thru visible pages and render buttons
         for (var page = startPoint; page <= endPoint; page++) {
 
-            if (page < 10 && min_page_digits == 2) {
-                var currentButton = $('<li class="page-number">0' + (page) + '</li>');
-            } else {
-                var currentButton = $('<li class="page-number">' + (page) + '</li>');
-            }
+            var pageDisplay = zeroPad(page, min_page_digits);
+            var currentButton = $('<li class="page-number">' + pageDisplay + '</li>');
 
             page == pagenumber ? currentButton.addClass('pgCurrent') : currentButton.click(function() { buttonClickCallback(this.firstChild.data); });
             currentButton.appendTo($pager);
