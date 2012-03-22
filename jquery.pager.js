@@ -313,13 +313,9 @@ function JqueryPager(target, options) {
         var all = this.each(function() {
             var obj = $(this).data('pager');
             if (typeof method == 'object' || ! method || ! obj) {
-                // TODO: why was it like this, rather than just
-                //       a simple if(!obj) {...}
                 var options = $.extend({}, $.fn.pager.defaults, method || {});
-                if (! obj) {
-                    obj = new JqueryPager($(this), options);
-                    $(this).data('pager', obj);
-                }
+                obj = new JqueryPager($(this), options);
+                $(this).data('pager', obj);
             } else {
                 if (typeof JqueryPager.prototype[method] == "function") {
                     rv = JqueryPager.prototype[method].apply(obj, Array.prototype.slice.call(args, 1));
