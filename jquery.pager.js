@@ -74,6 +74,7 @@ function JqueryPager(target, options) {
         return $this.target.each(function() {
             // empty out the destination element and then render out the pager with the supplied options
             $(this).empty().append( _render_pager($this) );
+            $(this).append( $('<div style="clear:both"></div>') );
         });
     };
 
