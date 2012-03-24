@@ -13,7 +13,6 @@
         });
 
         PageClick = function(pageclickednumber) {
-            $("#pager").pager({ pagenumber: pageclickednumber, pagecount: 15, buttonClickCallback: PageClick });
             $("#result").html("Clicked Page " + pageclickednumber);
         }
        
@@ -21,6 +20,6 @@
 </head>
 <body>
 <h1 id="result">Click the pager below.</h1>
-<div id="pager" ></div>
+<div id="pager" class="pager"></div>
 </body>
 </html>
